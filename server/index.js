@@ -5,7 +5,7 @@ import morgan from "morgan";
 
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import path from "path";
+// import path from "path";
 
 import shipmentRoutes from "./routes/shipments.js";
 import userRoutes from "./routes/users.js";
@@ -17,10 +17,14 @@ app.use(cors());
 app.use("/api", shipmentRoutes);
 app.use("/api", userRoutes);
 
-const __dirname = path.resolve();
+app.get("/", (req, res) => {
+	res.send("Welcome to VanHaul");
+});
 
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// const __dirname = path.resolve();
+
+// app.use(express.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 const { MONGO_URI } = process.env;
 const options = {
