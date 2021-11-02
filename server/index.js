@@ -1,6 +1,52 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import morgan from "morgan";
 
-require("dotenv").config();
-const { MongoClient } = require("mongodb");
+import dotenv from "dotenv";
+import { MongoClient } from "mongodb";
+import path from "path";
+
+import shipmentRoutes from "./routes/shipments.js";
+import userRoutes from "./routes/users.js";
+
+const app = express();
+dotenv.config();
+
+app.use(cors());
+app.use("/api", shipmentRoutes);
+app.use("/api", userRoutes);
+
+const __dirname = path.resolve();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+const { MONGO_URI } = process.env;
+const options = {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+};
+
+//Catch all endpoint
+app.use("*", (req, res) => {
+	res.status(404).json({
+		status: 404,
+		message: "This is obviously not what you are looking for.",
+	});
+});
+
+const PORT = process.env.PORT || 8000;
+//Setup fuction so we don't need to declare mongodb variables everytime.
+const setup = async () => {
+	const client = new MongoClient(MONGO_URI, options);
+	await client.connect();
+
+	app.locals.client = client;
+
+	const server = app.listen(PORT, function () {
+		console.info("🌍 Listening on port " + server.address().port);
+	});
+};
+
+setup();
