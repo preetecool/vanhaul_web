@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/static/js/main.a524bcaa.chunk.js",
+    "main.js.map": "/static/js/main.a524bcaa.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.900dd88b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.900dd88b.js.map",
+    "static/js/2.7dd8aa2d.chunk.js": "/static/js/2.7dd8aa2d.chunk.js",
+    "static/js/2.7dd8aa2d.chunk.js.map": "/static/js/2.7dd8aa2d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.7dd8aa2d.chunk.js.LICENSE.txt": "/static/js/2.7dd8aa2d.chunk.js.LICENSE.txt",
+    "static/media/circle-arrow.f7744557.svg": "/static/media/circle-arrow.f7744557.svg",
+    "static/media/hero.51a7099c.jpg": "/static/media/hero.51a7099c.jpg",
+    "static/media/vanhaul_logo.3e47f002.svg": "/static/media/vanhaul_logo.3e47f002.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.900dd88b.js",
+    "static/js/2.7dd8aa2d.chunk.js",
+    "static/js/main.a524bcaa.chunk.js"
+  ]
+}
