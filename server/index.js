@@ -5,7 +5,7 @@ import morgan from "morgan";
 
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-// import path from "path";
+import path from "path";
 
 import shipmentRoutes from "./routes/shipments.js";
 import userRoutes from "./routes/users.js";
@@ -21,10 +21,10 @@ app.get("/", (req, res) => {
 	res.send("Welcome to VanHaul");
 });
 
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
-// app.use(express.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 const { MONGO_URI } = process.env;
 const options = {
