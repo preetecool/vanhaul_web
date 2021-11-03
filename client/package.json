@@ -2,7 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://vanhaul.herokuapp.com",
+  "proxy": "localhost:8000",
+  "homepage": ".",
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
     "@testing-library/jest-dom": "^5.11.4",
