@@ -5,15 +5,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const AddUserRole = () => {
 	const { user, isAuthenticated } = useAuth0();
-
 	const [userSelectedRole, setUserSelectedRole] = useState(null);
 
 	const history = useHistory();
+	const baseUrl = "https://vanhaul.herokuapp.com";
 
 	//checking if user has role of null. If yes, assign them the role they select.
 	const handleRoleSubmit = (e) => {
 		e.preventDefault();
-		fetch("/api/users", {
+		fetch(`${baseUrl}/api/users`, {
 			method: "PATCH",
 			body: JSON.stringify({
 				email: user.email,
