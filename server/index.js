@@ -5,7 +5,8 @@ import morgan from "morgan";
 
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 import shipmentRoutes from "./routes/shipments.js";
 import userRoutes from "./routes/users.js";
@@ -21,8 +22,6 @@ app.get("/", (req, res) => {
 	res.send("Welcome to VanHaul");
 });
 
-const __dirname = path.resolve();
-
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -31,6 +30,13 @@ const options = {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "../client/build"));
+});
 
 //Catch all endpoint
 app.use("*", (req, res) => {
