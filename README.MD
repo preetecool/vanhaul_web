@@ -1,5 +1,10 @@
 To demo the app:
+visit: https://vanhaul.netlify.app/ 
+Please choose "dispatcher" to view all MVP functionalities.
 
+
+
+OR
 Open a split terminal
 
 cd server
