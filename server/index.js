@@ -19,7 +19,7 @@ app.use("/api", shipmentRoutes);
 app.use("/api", userRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to VanHaul");
+	res.send("Welcome to VanHaul");
 });
 
 app.use(express.urlencoded({ extended: false }));
@@ -27,36 +27,36 @@ app.use(bodyParser.json());
 
 const { MONGO_URI } = process.env;
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build"));
+	res.sendFile(path.join(__dirname, "../client/build"));
 });
 
 //Catch all endpoint
 app.use("*", (req, res) => {
-  res.status(404).json({
-    status: 404,
-    message: "This is obviously not what you are looking for.",
-  });
+	res.status(404).json({
+		status: 404,
+		message: "This is obviously not what you are looking for.",
+	});
 });
 
-const PORT = process.env.PORT || 8000;
+// const PORT = process.env.PORT || 8000;
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {
-  const client = new MongoClient(MONGO_URI, options);
-  await client.connect();
+	const client = new MongoClient(MONGO_URI, options);
+	await client.connect();
 
-  app.locals.client = client;
+	app.locals.client = client;
 
-  const server = app.listen(PORT, function () {
-    console.info("🌍 Listening on port " + server.address().port);
-  });
+	const server = app.listen(process.env.PORT || 8000, function () {
+		console.info("🌍 Listening on port " + server.address().port);
+	});
 };
 
 setup();
