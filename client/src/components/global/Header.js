@@ -10,7 +10,6 @@ const Header = () => {
 	const { user, isAuthenticated } = useAuth0();
 	const [loading, setLoading] = useState(true);
 	const [userData, setUserData] = useState(null);
-	const apiURL = process.env.BASE_URL;
 	useEffect(() => {
 		if (!isAuthenticated) {
 			return;
@@ -19,7 +18,7 @@ const Header = () => {
 			const id = user.email;
 			let response;
 			try {
-				response = await fetch(`${apiURL}/api/users/${id}`);
+				response = await fetch(`https://vanhaul.herokuapp.com/api/users/${id}`);
 				const data = await response.json();
 
 				setUserData(data.data);

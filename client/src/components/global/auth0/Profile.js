@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
 	const { user, isAuthenticated } = useAuth0();
-	const apiURL = process.env.BASE_URL;
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -14,7 +13,7 @@ const Profile = () => {
 					image: user.picture,
 					role: null,
 				};
-				await fetch(`${apiURL}/api/users`, {
+				await fetch(`https://vanhaul.herokuapp.com/api/users`, {
 					method: "POST",
 					body: JSON.stringify(userInfo),
 					headers: {

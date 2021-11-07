@@ -20,13 +20,11 @@ const App = () => {
 	const history = useHistory();
 	const location = useLocation();
 
-	const apiURL = process.env.BASE_URL;
-
 	const fetchUsers = async () => {
 		const id = user.email;
 		let response;
 		try {
-			response = await fetch(`${apiURL}/api/users/${id}`);
+			response = await fetch(`https://vanhaul.herokuapp.com/api/users/${id}`);
 			const data = await response.json();
 
 			setUserData(data.data);
@@ -44,7 +42,7 @@ const App = () => {
 					image: user.picture,
 					role: null,
 				};
-				await fetch(`${apiURL}/api/users`, {
+				await fetch(`https://vanhaul.herokuapp.com/api/users`, {
 					method: "POST",
 					headers: {
 						Accept: "application/json",

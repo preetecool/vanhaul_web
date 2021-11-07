@@ -9,12 +9,10 @@ const AddUserRole = () => {
 
 	const history = useHistory();
 
-	const apiURL = process.env.BASE_URL;
-
 	//checking if user has role of null. If yes, assign them the role they select.
 	const handleRoleSubmit = (e) => {
 		e.preventDefault();
-		fetch(`${apiURL}/api/users`, {
+		fetch(`https://vanhaul.herokuapp.com/api/users`, {
 			method: "PATCH",
 			body: JSON.stringify({
 				email: user.email,

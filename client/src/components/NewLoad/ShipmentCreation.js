@@ -21,13 +21,11 @@ const ShipmentCreation = () => {
 		shipperReceiverId,
 	} = useContext(ShipmentContext);
 
-	const apiURL = process.env.BASE_URL;
-
 	const createAndAssignLoad = () => {
 		if (!selectedDriver || !loadInfo || !distance) {
 			return;
 		}
-		fetch(`${apiURL}/api/loads`, {
+		fetch(`https://vanhaul.herokuapp.com/api/loads`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

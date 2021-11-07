@@ -10,8 +10,6 @@ const ShipperReceiverLoads = () => {
 	const [loads, setLoads] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-	const apiURL = process.env.BASE_URL;
-
 	useEffect(() => {
 		if (!isAuthenticated) {
 			return;
@@ -19,7 +17,7 @@ const ShipperReceiverLoads = () => {
 		const getShipperReceiverLoads = async () => {
 			const shipperReceiverId = user.email;
 			const response = await fetch(
-				`${apiURL}/api/srloads/${shipperReceiverId}`
+				`https://vanhaul.herokuapp.com/api/srloads/${shipperReceiverId}`
 			);
 			const data = await response.json();
 			setLoads(data.data);

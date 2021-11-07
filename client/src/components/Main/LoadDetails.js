@@ -11,14 +11,14 @@ const LoadDetails = () => {
 	const [loading, setLoading] = useState(true);
 	const [userData, setUserData] = useState(null);
 
-	const apiURL = process.env.BASE_URL;
-
 	useEffect(() => {
 		if (!isAuthenticated) {
 			return;
 		}
 		const getLoadDetails = async () => {
-			const response = await fetch(`${apiURL}/api/loads/${_id}`);
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/loads/${_id}`
+			);
 			const data = await response.json();
 			setLoad(data.data);
 			setLoading(false);
@@ -35,7 +35,7 @@ const LoadDetails = () => {
 			const id = user.email;
 			let response;
 			try {
-				response = await fetch(`${apiURL}/api/users/${id}`);
+				response = await fetch(`https://vanhaul.herokuapp.com/api/users/${id}`);
 				const data = await response.json();
 
 				setUserData(data.data);

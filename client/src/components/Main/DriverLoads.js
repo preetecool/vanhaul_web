@@ -9,7 +9,6 @@ const DriverLoads = () => {
 	const { user, isAuthenticated } = useAuth0();
 	const [loads, setLoads] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const apiURL = process.env.BASE_URL;
 
 	useEffect(() => {
 		if (!isAuthenticated) {
@@ -17,7 +16,9 @@ const DriverLoads = () => {
 		}
 		const getDriversLoads = async () => {
 			const driverId = user.email;
-			const response = await fetch(`${apiURL}/api/driverloads/${driverId}`);
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/driverloads/${driverId}`
+			);
 			const data = await response.json();
 			setLoads(data.data);
 			setLoading(false);

@@ -9,7 +9,6 @@ const DispatcherLoads = () => {
 	const { user, isAuthenticated } = useAuth0();
 	const [loads, setLoads] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const apiURL = process.env.BASE_URL;
 
 	useEffect(() => {
 		if (!isAuthenticated) {
@@ -18,7 +17,7 @@ const DispatcherLoads = () => {
 		const getDispatcherLoads = async () => {
 			const dispatcherId = user.email;
 			const response = await fetch(
-				`${apiURL}/api/dispatchedloads/${dispatcherId}`
+				`https://vanhaul.herokuapp.com/api/dispatchedloads/${dispatcherId}`
 			);
 			const data = await response.json();
 			setLoads(data.data);

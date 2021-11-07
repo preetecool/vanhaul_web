@@ -8,11 +8,9 @@ const Contacts = () => {
 	const [suggestions, setSuggestions] = useState([]);
 	const [value, setValue] = useState("");
 
-	const apiURL = process.env.BASE_URL;
-
 	useEffect(() => {
 		const getContacts = async () => {
-			const response = await fetch(`${apiURL}/api/users`);
+			const response = await fetch(`https://vanhaul.herokuapp.com/api/users`);
 			const data = await response.json();
 			setContacts(data.data);
 		};

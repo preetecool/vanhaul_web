@@ -9,12 +9,10 @@ const DriverSelection = () => {
 	const [searchValue, setSearchValue] = useState("");
 	const [suggestions, setSuggestions] = useState([]);
 
-	const apiURL = process.env.BASE_URL;
-
 	//fetching drivers from database
 	useEffect(() => {
 		const getDrivers = async () => {
-			const response = await fetch(`${apiURL}/api/drivers`);
+			const response = await fetch(`https://vanhaul.herokuapp.com/api/drivers`);
 			const data = await response.json();
 			setDrivers(data.data);
 		};
