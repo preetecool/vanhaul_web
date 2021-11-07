@@ -4,13 +4,15 @@ import styled from "styled-components";
 const Contacts = () => {
 	const [contacts, setContacts] = useState([]);
 	const [searchValue, setSearchValue] = useState("");
-	const [suggestions, setSuggestions] = useState([]);
 
+	const [suggestions, setSuggestions] = useState([]);
 	const [value, setValue] = useState("");
+
+	const apiURL = process.env.BASE_URL;
 
 	useEffect(() => {
 		const getContacts = async () => {
-			const response = await fetch("/api/users");
+			const response = await fetch(`${apiURL}/api/users`);
 			const data = await response.json();
 			setContacts(data.data);
 		};

@@ -11,6 +11,8 @@ const Home = () => {
 	const [userData, setUserData] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+	const apiURL = process.env.BASE_URL;
+
 	//   fetching user by email address
 	useEffect(() => {
 		if (!isAuthenticated) {
@@ -18,7 +20,7 @@ const Home = () => {
 		}
 		const fetchUsers = async () => {
 			const id = user.email;
-			const response = await fetch(`/api/users/${id}`);
+			const response = await fetch(`${apiURL}/api/users/${id}`);
 			const data = await response.json();
 			setUserData(data.data);
 			setLoading(false);
