@@ -14,12 +14,8 @@ import userRoutes from "./routes/users.js";
 const app = express();
 dotenv.config();
 
-app.use(
-	cors({
-		origin: "*",
-	})
-);
-
+//cores request
+app.use(cors());
 app.options("*", cors());
 
 app.use("/api", shipmentRoutes);
