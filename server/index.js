@@ -43,12 +43,12 @@ app.get("*", (req, res) => {
 });
 
 //Catch all endpoint
-app.use("*", (req, res) => {
-	res.status(404).json({
-		status: 404,
-		message: "This is obviously not what you are looking for.",
-	});
-});
+// app.use("*", (req, res) => {
+// 	res.status(404).json({
+// 		status: 404,
+// 		message: "This is obviously not what you are looking for.",
+// 	});
+// });
 
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {
