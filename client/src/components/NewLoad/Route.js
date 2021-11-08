@@ -30,11 +30,7 @@ const Route = () => {
 			return;
 		}
 		fetch(
-			`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`,
-			{
-				method: "GET",
-				headers: {},
-			}
+			`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`
 		)
 			.then((res) => {
 				return res.json();
