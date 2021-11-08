@@ -34,7 +34,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (!user && isAuthenticated) {
+    if (isAuthenticated) {
       const postUserData = async () => {
         const userInfo = {
           fullName: user.name,
