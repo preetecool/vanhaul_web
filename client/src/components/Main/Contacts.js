@@ -4,13 +4,13 @@ import styled from "styled-components";
 const Contacts = () => {
 	const [contacts, setContacts] = useState([]);
 	const [searchValue, setSearchValue] = useState("");
-	const [suggestions, setSuggestions] = useState([]);
 
+	const [suggestions, setSuggestions] = useState([]);
 	const [value, setValue] = useState("");
 
 	useEffect(() => {
 		const getContacts = async () => {
-			const response = await fetch("/api/users");
+			const response = await fetch(`https://vanhaul.herokuapp.com/api/users`);
 			const data = await response.json();
 			setContacts(data.data);
 		};

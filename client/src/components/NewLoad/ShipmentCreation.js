@@ -25,7 +25,7 @@ const ShipmentCreation = () => {
 		if (!selectedDriver || !loadInfo || !distance) {
 			return;
 		}
-		fetch(`/api/loads`, {
+		fetch(`https://vanhaul.herokuapp.com/api/loads`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

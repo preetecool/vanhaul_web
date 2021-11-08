@@ -16,7 +16,9 @@ const ShipperReceiverLoads = () => {
 		}
 		const getShipperReceiverLoads = async () => {
 			const shipperReceiverId = user.email;
-			const response = await fetch(`/api/srloads/${shipperReceiverId}`);
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/srloads/${shipperReceiverId}`
+			);
 			const data = await response.json();
 			setLoads(data.data);
 			setLoading(false);

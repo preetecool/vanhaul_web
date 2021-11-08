@@ -16,7 +16,9 @@ const DriverLoads = () => {
 		}
 		const getDriversLoads = async () => {
 			const driverId = user.email;
-			const response = await fetch(`/api/driverloads/${driverId}`);
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/driverloads/${driverId}`
+			);
 			const data = await response.json();
 			setLoads(data.data);
 			setLoading(false);

@@ -18,7 +18,9 @@ const Home = () => {
 		}
 		const fetchUsers = async () => {
 			const id = user.email;
-			const response = await fetch(`/api/users/${id}`);
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/users/${id}`
+			);
 			const data = await response.json();
 			setUserData(data.data);
 			setLoading(false);

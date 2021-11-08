@@ -13,7 +13,7 @@ const Profile = () => {
 					image: user.picture,
 					role: null,
 				};
-				await fetch(`/api/users`, {
+				await fetch(`https://vanhaul.herokuapp.com/api/users`, {
 					method: "POST",
 					body: JSON.stringify(userInfo),
 					headers: {

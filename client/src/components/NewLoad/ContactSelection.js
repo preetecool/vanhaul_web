@@ -12,7 +12,9 @@ const ContactSelection = () => {
 
 	useEffect(() => {
 		const getContact = async () => {
-			const response = await fetch("/api/shipper-receiver");
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/shipper-receiver`
+			);
 			const data = await response.json();
 			setShipperReceivers(data.data);
 		};

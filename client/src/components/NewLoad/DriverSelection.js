@@ -12,7 +12,7 @@ const DriverSelection = () => {
 	//fetching drivers from database
 	useEffect(() => {
 		const getDrivers = async () => {
-			const response = await fetch("/api/drivers");
+			const response = await fetch(`https://vanhaul.herokuapp.com/api/drivers`);
 			const data = await response.json();
 			setDrivers(data.data);
 		};

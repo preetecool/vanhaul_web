@@ -16,7 +16,9 @@ const DispatcherLoads = () => {
 		}
 		const getDispatcherLoads = async () => {
 			const dispatcherId = user.email;
-			const response = await fetch(`/api/dispatchedloads/${dispatcherId}`);
+			const response = await fetch(
+				`https://vanhaul.herokuapp.com/api/dispatchedloads/${dispatcherId}`
+			);
 			const data = await response.json();
 			setLoads(data.data);
 			setLoading(false);
