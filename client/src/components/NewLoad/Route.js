@@ -30,12 +30,17 @@ const Route = () => {
 			return;
 		}
 		fetch(
-			`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`
+			`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`,
+			{
+				method: "GET",
+				headers: {},
+			}
 		)
 			.then((res) => {
 				return res.json();
 			})
 			.then((data) => {
+				console.log(data);
 				setDistance(data.rows[0].elements[0].distance.text);
 				setDrivingTime(data.rows[0].elements[0].duration.text);
 			})
