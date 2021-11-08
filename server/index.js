@@ -19,8 +19,8 @@ app.use(
 		origin: "https://vanhaul.netlify.app/",
 	})
 );
-app.use("/api", cors(), shipmentRoutes);
-app.use("/api", cors(), userRoutes);
+app.use("/api", shipmentRoutes);
+app.use("/api", userRoutes);
 
 app.get("/", (req, res) => {
 	res.send("Welcome to VanHaul");
@@ -50,7 +50,6 @@ app.use("*", (req, res) => {
 	});
 });
 
-// const PORT = process.env.PORT || 8000;
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {
 	const client = new MongoClient(MONGO_URI, options);
