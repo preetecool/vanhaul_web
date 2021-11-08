@@ -19,8 +19,8 @@ app.use(
 		origin: "https://vanhaul.netlify.app/",
 	})
 );
-app.use("/api", shipmentRoutes);
-app.use("/api", userRoutes);
+app.use("/api", cors(), shipmentRoutes);
+app.use("/api", cors(), userRoutes);
 
 app.get("/", (req, res) => {
 	res.send("Welcome to VanHaul");
