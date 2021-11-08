@@ -36,7 +36,6 @@ const Route = () => {
 				return res.json();
 			})
 			.then((data) => {
-				console.log(data);
 				setDistance(data.rows[0].elements[0].distance.text);
 				setDrivingTime(data.rows[0].elements[0].duration.text);
 			})
