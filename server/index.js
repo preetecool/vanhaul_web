@@ -14,7 +14,11 @@ import userRoutes from "./routes/users.js";
 const app = express();
 dotenv.config();
 
-app.use(cors());
+app.use(
+	cors({
+		origin: "https://vanhaul.netlify.app/",
+	})
+);
 app.use("/api", shipmentRoutes);
 app.use("/api", userRoutes);
 
