@@ -15,100 +15,100 @@ import Contacts from "./components/Main/Contacts";
 import LandingPage from "./components/Main/LandingPage";
 
 const App = () => {
-	const { user, isAuthenticated } = useAuth0();
-	const [userData, setUserData] = useState(null);
-	const history = useHistory();
-	const location = useLocation();
+  const { user, isAuthenticated } = useAuth0();
+  const [userData, setUserData] = useState(null);
+  const history = useHistory();
+  const location = useLocation();
 
-	const fetchUsers = async () => {
-		const id = user.email;
-		let response;
-		try {
-			response = await fetch(`https://vanhaul.herokuapp.com/api/users/${id}`);
-			const data = await response.json();
+  const fetchUsers = async () => {
+    const id = user.email;
+    let response;
+    try {
+      response = await fetch(`https://vanhaul.herokuapp.com/api/users/${id}`);
+      const data = await response.json();
 
-			setUserData(data.data);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+      setUserData(data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			const postUserData = async () => {
-				const userInfo = {
-					fullName: user.name,
-					email: user.email,
-					image: user.picture,
-					role: null,
-				};
-				await fetch(`https://vanhaul.herokuapp.com/api/users`, {
-					method: "POST",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(userInfo),
-				});
-				fetchUsers();
-			};
-			postUserData();
-		}
-	}, [isAuthenticated]);
+  useEffect(() => {
+    if (!user && isAuthenticated) {
+      const postUserData = async () => {
+        const userInfo = {
+          fullName: user.name,
+          email: user.email,
+          image: user.picture,
+          role: null,
+        };
+        await fetch(`https://vanhaul.herokuapp.com/api/users`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        });
+        fetchUsers();
+      };
+      postUserData();
+    }
+  }, [isAuthenticated]);
 
-	// console.log(user);
+  // console.log(user);
 
-	useEffect(() => {
-		if (!isAuthenticated) {
-			if (location.pathname !== "/") {
-				history.push("/Shipments");
-			}
-			return;
-		}
+  useEffect(() => {
+    if (!isAuthenticated) {
+      if (location.pathname !== "/") {
+        history.push("/Shipments");
+      }
+      return;
+    }
 
-		fetchUsers();
-	}, [isAuthenticated]);
+    fetchUsers();
+  }, [isAuthenticated]);
 
-	useEffect(() => {
-		if (!userData) {
-			return;
-		}
-		if (userData.role === null && location.pathname !== "/addRole") {
-			history.push("/addRole");
-		}
-	}, [userData]);
-	return (
-		<Wrapper>
-			<Header />
-			<GlobalStyles />
-			<Switch>
-				<Container>
-					<Route exact path="/">
-						<LandingPage />
-					</Route>
-					<Route exact path="/Shipments">
-						<Home />
-					</Route>
-					<Route exact path="/addRole">
-						<AddUserRole />
-					</Route>
-					<Route exact path="/Contacts">
-						<Contacts />
-					</Route>
-					<Route exact path="/NewLoad">
-						<ShipmentCreation />
-					</Route>
-					<Route exact path="/loads/:_id">
-						<LoadDetails />
-					</Route>
-				</Container>
-			</Switch>
-		</Wrapper>
-	);
+  useEffect(() => {
+    if (!userData) {
+      return;
+    }
+    if (userData.role === null && location.pathname !== "/addRole") {
+      history.push("/addRole");
+    }
+  }, [userData]);
+  return (
+    <Wrapper>
+      <Header />
+      <GlobalStyles />
+      <Switch>
+        <Container>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route exact path="/Shipments">
+            <Home />
+          </Route>
+          <Route exact path="/addRole">
+            <AddUserRole />
+          </Route>
+          <Route exact path="/Contacts">
+            <Contacts />
+          </Route>
+          <Route exact path="/NewLoad">
+            <ShipmentCreation />
+          </Route>
+          <Route exact path="/loads/:_id">
+            <LoadDetails />
+          </Route>
+        </Container>
+      </Switch>
+    </Wrapper>
+  );
 };
 
 const Container = styled.div`
-	padding: 5%;
+  padding: 5%;
 `;
 
 export default App;
