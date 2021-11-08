@@ -16,7 +16,7 @@ dotenv.config();
 
 app.use(
 	cors({
-		origin: "https://vanhaul.netlify.app/",
+		origin: "*",
 	})
 );
 app.use("/api", shipmentRoutes);
