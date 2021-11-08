@@ -19,6 +19,9 @@ app.use(
 		origin: "*",
 	})
 );
+
+app.options("*", cors());
+
 app.use("/api", shipmentRoutes);
 app.use("/api", userRoutes);
 
