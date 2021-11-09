@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const { MONGO_URI } = process.env;
+const MONGO_URI = process.env.MONGO_URI;
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
