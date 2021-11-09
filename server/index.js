@@ -6,7 +6,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 import { fileURLToPath } from "url";
-import path from "path";
+import path, { dirname } from "path";
 
 import shipmentRoutes from "./routes/shipments.js";
 import userRoutes from "./routes/users.js";
@@ -38,7 +38,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build"));
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 //Catch all endpoint
