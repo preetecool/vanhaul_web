@@ -51,18 +51,42 @@ const Route = () => {
     if (!locations) {
       return;
     }
-    <DistanceMatrixService
-      options={{
-        destinations: [locations.destination],
-        origins: [locations.origin],
+    const orig = locations.origin;
+    const dest = locations.destination;
+
+    service.getDistanceMatrix(
+      {
+        origins: [orig],
+        destinations: [dest],
         travelMode: "DRIVING",
-      }}
-      callback={(response) => {
-        console.log(response);
-        setDrivingTime(response.rows[0].elements[0].duration.text);
-        setDistance(response.rows[0].elements[0].distance.text);
-      }}
-    />;
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false,
+      },
+      (response, status) => {
+        if (status !== "OK") {
+          alert("Error was: " + status);
+        } else {
+          let origins = response.originAddresses;
+          let destinations = response.destinationAddresses;
+
+          //Loop through the elements row to get the value of duration and distance
+          for (var i = 0; i < origins.length; i++) {
+            var results = response.rows[i].elements;
+            for (var j = 0; j < results.length; j++) {
+              var element = results[j];
+              var distanceString = element.distance.text;
+              var durationString = element.duration.text;
+
+              setDistance(parseInt(distanceString, 10));
+              setDrivingTime(parseInt(durationString, 10));
+              console.log(this.state.distance);
+              console.log(this.state.duration);
+            }
+          }
+        }
+      }
+    );
   };
 
   return (
