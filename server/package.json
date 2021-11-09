@@ -8,8 +8,7 @@
     "yarn": "1.22.5"
 },
   "scripts": {
-    "start": "node index.js",
-    "install": "cd client && yarn install"
+    "start": "node index.js"
 
   },
   "license": "MIT",
