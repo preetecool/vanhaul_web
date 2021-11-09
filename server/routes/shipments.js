@@ -1,15 +1,15 @@
 import express from "express";
 
 import {
-	createLoad,
-	getLoads,
-	getLoadDetails,
-	getDriverLoads,
-	getDispatcherLoads,
-	getShipperReceiverLoads,
+  createLoad,
+  getLoads,
+  getLoadDetails,
+  getDriverLoads,
+  getDispatcherLoads,
+  getShipperReceiverLoads,
 } from "../handlers/shipments.js";
 
-const router = express.Router();
+const shipmentRouter = express.Router();
 
 //shipment endpoints
 router.get("/loads", getLoads);
@@ -19,4 +19,4 @@ router.get("/driverloads/:driverId", getDriverLoads);
 router.get("/dispatchedloads/:dispatcherId", getDispatcherLoads);
 router.get("/srloads/:shipperReceiverId", getShipperReceiverLoads);
 
-export default router;
+export default shipmentRouter;

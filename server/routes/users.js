@@ -1,15 +1,15 @@
 import express from "express";
 
 import {
-	getDrivers,
-	getShipperReceiver,
-	createUser,
-	addUserRole,
-	findAllUsers,
-	findAUser,
+  getDrivers,
+  getShipperReceiver,
+  createUser,
+  addUserRole,
+  findAllUsers,
+  findAUser,
 } from "../handlers/users.js";
 
-const router = express.Router();
+const userRouter = express.Router();
 
 //users endpoints
 router.get("/users/:email", findAUser);
@@ -20,4 +20,4 @@ router.patch("/users", addUserRole);
 router.get("/drivers", getDrivers);
 router.get("/shipper-receiver", getShipperReceiver);
 
-export default router;
+export default userRouter;
