@@ -12,9 +12,11 @@ import userRouter from "./routes/users.js";
 const app = express();
 dotenv.config();
 
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
 //cors request
 app.use(cors());
-app.options("*", cors());
 
 app.use("/api", shipmentRouter);
 app.use("/api", userRouter);
