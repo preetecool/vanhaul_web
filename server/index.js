@@ -8,8 +8,8 @@ import { MongoClient } from "mongodb";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 
-import shipmentRoutes from "./routes/shipments.js";
-import userRoutes from "./routes/users.js";
+import shipmentRouter from "./routes/shipments.js";
+import userRouter from "./routes/users.js";
 
 const app = express();
 dotenv.config();
@@ -18,8 +18,8 @@ dotenv.config();
 app.use(cors());
 app.options("*", cors());
 
-app.use("/api", shipmentRoutes);
-app.use("/api", userRoutes);
+app.use("/api", shipmentRouter);
+app.use("/api", userRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to VanHaul");
@@ -37,17 +37,17 @@ const options = {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 //Catch all endpoint
-app.use("*", (req, res) => {
-  res.status(404).json({
-    status: 404,
-    message: "This is obviously not what you are looking for.",
-  });
-});
+// app.use("*", (req, res) => {
+//   res.status(404).json({
+//     status: 404,
+//     message: "This is obviously not what you are looking for.",
+//   });
+// });
 
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {
