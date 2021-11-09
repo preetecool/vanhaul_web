@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import PlacesAutocomplete from "react-places-autocomplete";
 
+import PlacesAutocomplete from "react-places-autocomplete";
 import { ShipmentContext } from "../global/hooks/ShipmentContext";
+import { GoogleMap, DistanceMatrixService } from "@react-google-maps/api";
 
 const Route = () => {
   const {
@@ -24,24 +25,45 @@ const Route = () => {
     setLocations({ ...locations, destination: value });
   };
 
+  //   const getDistanceAndTime = (e) => {
+  //     e.preventDefault();
+  //     if (!locations) {
+  //       return;
+  //     }
+  //     fetch(
+  //       `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`
+  //     )
+  //       .then((res) => {
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         setDistance(data.rows[0].elements[0].distance.text);
+  //         setDrivingTime(data.rows[0].elements[0].duration.text);
+  //       })
+  //       .then(() => {
+  //         setLoaded(false);
+  //       });
+  //   };
+
   const getDistanceAndTime = (e) => {
     e.preventDefault();
     if (!locations) {
       return;
     }
-    fetch(
-      `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setDistance(data.rows[0].elements[0].distance.text);
-        setDrivingTime(data.rows[0].elements[0].duration.text);
-      })
-      .then(() => {
-        setLoaded(false);
-      });
+    const matrix = new google.maps.DistanceMatrixService();
+    matrix.getDistanceMatrix(
+      {
+        origins: [locations.origin],
+        destinations: [locations.destination],
+        travelMode: google.maps.TravelMode.DRIVING,
+      }
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+    );
   };
 
   return (
