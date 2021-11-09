@@ -6,7 +6,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 import { fileURLToPath } from "url";
-import path, { dirname } from "path";
+import path from "path";
 
 import shipmentRoutes from "./routes/shipments.js";
 import userRoutes from "./routes/users.js";
@@ -22,7 +22,7 @@ app.use("/api", shipmentRoutes);
 app.use("/api", userRoutes);
 
 app.get("/", (req, res) => {
-	res.send("Welcome to VanHaul");
+  res.send("Welcome to VanHaul");
 });
 
 app.use(express.urlencoded({ extended: false }));
@@ -30,15 +30,15 @@ app.use(bodyParser.json());
 
 const { MONGO_URI } = process.env;
 const options = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "../client/build"));
+  res.sendFile(path.join(__dirname, "../client/build"));
 });
 
 //Catch all endpoint
@@ -51,14 +51,14 @@ app.get("*", (req, res) => {
 
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {
-	const client = new MongoClient(MONGO_URI, options);
-	await client.connect();
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
 
-	app.locals.client = client;
+  app.locals.client = client;
 
-	const server = app.listen(process.env.PORT || 8000, function () {
-		console.info("🌍 Listening on port " + server.address().port);
-	});
+  const server = app.listen(process.env.PORT || 8000, function () {
+    console.info("🌍 Listening on port " + server.address().port);
+  });
 };
 
 setup();
