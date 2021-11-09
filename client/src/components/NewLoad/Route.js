@@ -51,20 +51,18 @@ const Route = () => {
     if (!locations) {
       return;
     }
-    const matrix = new google.maps.DistanceMatrixService();
-    matrix.getDistanceMatrix(
-      {
-        origins: [locations.origin],
+    <DistanceMatrixService
+      options={{
         destinations: [locations.destination],
-        travelMode: google.maps.TravelMode.DRIVING,
-      }
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-    );
+        origins: [locations.origin],
+        travelMode: "DRIVING",
+      }}
+      callback={(response) => {
+        console.log(response);
+        setDrivingTime(response.rows[0].elements[0].duration.text);
+        setDistance(response.rows[0].elements[0].distance.text);
+      }}
+    />;
   };
 
   return (
