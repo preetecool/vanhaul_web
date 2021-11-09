@@ -20,4 +20,4 @@ router.patch("/users", addUserRole);
 router.get("/drivers", getDrivers);
 router.get("/shipper-receiver", getShipperReceiver);
 
-export default userRouter;
+export default router;
