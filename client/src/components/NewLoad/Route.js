@@ -53,6 +53,7 @@ const Route = () => {
     }
 
     const matrix = new google.maps.DistanceMatrixService();
+
     const orig = locations.origin;
     const dest = locations.destination;
 
@@ -73,17 +74,17 @@ const Route = () => {
           let destinations = response.destinationAddresses;
 
           //Loop through the elements row to get the value of duration and distance
-          for (var i = 0; i < origins.length; i++) {
-            var results = response.rows[i].elements;
-            for (var j = 0; j < results.length; j++) {
-              var element = results[j];
-              var distanceString = element.distance.text;
-              var durationString = element.duration.text;
+          for (let i = 0; i < origins.length; i++) {
+            let results = response.rows[i].elements;
+            for (let j = 0; j < results.length; j++) {
+              let element = results[j];
+              let distanceString = element.distance.text;
+              let durationString = element.duration.text;
 
               setDistance(parseInt(distanceString, 10));
               setDrivingTime(parseInt(durationString, 10));
-              console.log(this.state.distance);
-              console.log(this.state.duration);
+              console.log(distance);
+              console.log(drivingTime);
             }
           }
         }
