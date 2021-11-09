@@ -9,14 +9,14 @@ import {
   getShipperReceiverLoads,
 } from "../handlers/shipments.js";
 
-const shipmentRouter = express.Router();
+const router = express.Router();
 
 //shipment endpoints
-shipmentRouter.get("/loads", getLoads);
-shipmentRouter.get("/loads/:_id", getLoadDetails);
-shipmentRouter.post("loads", createLoad);
-shipmentRouter.get("/driverloads/:driverId", getDriverLoads);
-shipmentRouter.get("/dispatchedloads/:dispatcherId", getDispatcherLoads);
-shipmentRouter.get("/srloads/:shipperReceiverId", getShipperReceiverLoads);
+router.get("/loads", getLoads);
+router.get("/loads/:_id", getLoadDetails);
+router.post("loads", createLoad);
+router.get("/driverloads/:driverId", getDriverLoads);
+router.get("/dispatchedloads/:dispatcherId", getDispatcherLoads);
+router.get("/srloads/:shipperReceiverId", getShipperReceiverLoads);
 
-export default shipmentRouter;
+export default router;

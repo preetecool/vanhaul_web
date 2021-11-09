@@ -5,8 +5,6 @@ import morgan from "morgan";
 
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import { fileURLToPath } from "url";
-import path, { dirname } from "path";
 
 import shipmentRouter from "./routes/shipments.js";
 import userRouter from "./routes/users.js";
@@ -33,21 +31,6 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
-
-//Catch all endpoint
-// app.use("*", (req, res) => {
-//   res.status(404).json({
-//     status: 404,
-//     message: "This is obviously not what you are looking for.",
-//   });
-// });
 
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {

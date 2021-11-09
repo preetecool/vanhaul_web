@@ -1,6 +1,7 @@
-"use strict";
-
 import { v4 as uuidv4 } from "uuid";
+
+const router = express.Router();
+
 //utility function for sending a response
 const sendResponse = ({ res, status, message, data, ...rest }) => {
   res.status(status).json({ status, message, data, ...rest });
@@ -157,3 +158,5 @@ export const createLoad = async (req, res) => {
     sendResponse({ res, status: 500, message: err.message });
   }
 };
+
+export default router;
