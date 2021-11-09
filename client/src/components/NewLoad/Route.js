@@ -51,10 +51,12 @@ const Route = () => {
     if (!locations) {
       return;
     }
+
+    const matrix = new google.maps.DistanceMatrixService();
     const orig = locations.origin;
     const dest = locations.destination;
 
-    service.getDistanceMatrix(
+    matrix.getDistanceMatrix(
       {
         origins: [orig],
         destinations: [dest],
