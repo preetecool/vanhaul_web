@@ -26,26 +26,6 @@ const Route = () => {
     setLocations({ ...locations, destination: value });
   };
 
-  //   const getDistanceAndTime = (e) => {
-  //     e.preventDefault();
-  //     if (!locations) {
-  //       return;
-  //     }
-  //     fetch(
-  //       `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${locations.origin}&destinations=${locations.destination}&units=imperial&key=AIzaSyAS_aEppj2N3qwPyEa4Q_UWD5gHFu7kTAs`
-  //     )
-  //       .then((res) => {
-  //         return res.json();
-  //       })
-  //       .then((data) => {
-  //         setDistance(data.rows[0].elements[0].distance.text);
-  //         setDrivingTime(data.rows[0].elements[0].duration.text);
-  //       })
-  //       .then(() => {
-  //         setLoaded(false);
-  //       });
-  //   };
-
   const getDistanceAndTime = (e) => {
     e.preventDefault();
     if (!locations) {
@@ -62,7 +42,7 @@ const Route = () => {
         origins: [orig],
         destinations: [dest],
         travelMode: "DRIVING",
-        unitSystem: google.maps.UnitSystem.METRIC,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
         avoidHighways: false,
         avoidTolls: false,
       },
@@ -83,6 +63,7 @@ const Route = () => {
 
               setDistance(parseInt(distanceString, 10));
               setDrivingTime(parseInt(durationString, 10));
+              setLoaded(false);
               console.log(distance);
               console.log(drivingTime);
             }
