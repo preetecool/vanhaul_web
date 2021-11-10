@@ -6,11 +6,16 @@ import { MongoClient } from "mongodb";
 import shipmentRouter from "./routes/shipments.js";
 import userRouter from "./routes/users.js";
 
-const app = express();
 dotenv.config();
+
+const app = express();
 
 //cors request
 app.use(cors());
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
 
 const MONGO_URI = process.env.MONGO_URI;
 const options = {
@@ -24,10 +29,6 @@ app.use("/api", userRouter);
 app.get("/", (req, res) => {
   res.send("Welcome to VanHaul");
 });
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
 
 //Catch all endpoint
 app.use("*", (req, res) => {
