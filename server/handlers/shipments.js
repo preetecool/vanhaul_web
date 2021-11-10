@@ -152,7 +152,7 @@ export const createLoad = async (req, res) => {
 		sendResponse({
 			res,
 			status: 200,
-			data: newLoad,
+			data: result,
 			message: "Shipment Created",
 		});
 	} catch (err) {

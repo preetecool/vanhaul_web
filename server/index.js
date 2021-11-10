@@ -1,7 +1,5 @@
 import express from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
-import morgan from "morgan";
 
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
@@ -29,8 +27,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(morgan("tiny"));
 app.use(express.json());
 app.use(express.static("public"));
 
