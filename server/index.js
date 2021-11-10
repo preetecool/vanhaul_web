@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-
+import body
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 
@@ -26,7 +26,8 @@ app.get("/", (req, res) => {
 	res.send("Welcome to VanHaul");
 });
 
-app.use(express.urlencoded({ extended: false }));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
