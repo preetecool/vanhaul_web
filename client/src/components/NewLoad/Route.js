@@ -61,8 +61,8 @@ const Route = () => {
               let distanceString = element.distance.text;
               let durationString = element.duration.text;
 
-              setDistance(parseInt(distanceString, 10));
-              setDrivingTime(parseInt(durationString, 10));
+              setDistance(distanceString);
+              setDrivingTime(durationString);
               setLoaded(false);
               console.log(distance);
               console.log(drivingTime);
