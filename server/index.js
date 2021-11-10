@@ -15,14 +15,11 @@ dotenv.config();
 //cors request
 app.use(cors());
 
-// app.use(function (req, res, next) {
-// 	res.header("Access-Control-Allow-Origin", "*");
-// 	res.header(
-// 		"Access-Control-Allow-Headers",
-// 		"Origin, X-Requested-With, Content-Type, Accept"
-// 	);
-// 	next();
-// });
+const MONGO_URI = process.env.MONGO_URI;
+const options = {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+};
 
 app.use("/api", shipmentRouter);
 app.use("/api", userRouter);
@@ -31,14 +28,19 @@ app.get("/", (req, res) => {
 	res.send("Welcome to VanHaul");
 });
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(morgan("tiny"));
+app.use(express.json());
+app.use(express.static("public"));
 
-const MONGO_URI = process.env.MONGO_URI;
-const options = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-};
+//Catch all endpoint
+app.use("*", (req, res) => {
+	res.status(404).json({
+		status: 404,
+		message: "This is obviously not what you are looking for.",
+	});
+});
 
 //Setup fuction so we don't need to declare mongodb variables everytime.
 const setup = async () => {
