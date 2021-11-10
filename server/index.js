@@ -13,7 +13,11 @@ const app = express();
 dotenv.config();
 
 //cors request
-app.use(cors());
+app.use(
+	cors({
+		origin: "https://vanhaul.netlify.app",
+	})
+);
 
 app.use("/api", shipmentRouter);
 app.use("/api", userRouter);
