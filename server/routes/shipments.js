@@ -7,6 +7,7 @@ import {
 	getDriverLoads,
 	getDispatcherLoads,
 	getShipperReceiverLoads,
+	deleteLoad,
 } from "../handlers/shipments.js";
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.post("/loads", createLoad);
 router.get("/driverloads/:driverId", getDriverLoads);
 router.get("/dispatchedloads/:dispatcherId", getDispatcherLoads);
 router.get("/srloads/:shipperReceiverId", getShipperReceiverLoads);
+router.delete("/loads/:_id", deleteLoad);
 
 export default router;
