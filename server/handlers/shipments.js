@@ -167,6 +167,7 @@ export const deleteLoad = async (req, res) => {
 	try {
 		const load = await db.collection("loads").findOne({ _id });
 		await db.collection("loads").deleteOne({ _id: _id });
+		sendResponse({ res, status: 200, message: err.message });
 	} catch (err) {
 		sendResponse({ res, status: 500, message: err.message });
 	}
