@@ -48,7 +48,7 @@ export const getLoadDetails = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		sendResponse({ res, status: 400, message: err.message });
+		sendResponse({ res, status: 500, message: err.message });
 	}
 };
 
@@ -77,7 +77,7 @@ export const getDriverLoads = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		sendResponse({ res, status: 400, message: err.message });
+		sendResponse({ res, status: 500, message: err.message });
 	}
 };
 
@@ -106,7 +106,7 @@ export const getDispatcherLoads = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		sendResponse({ res, status: 400, message: err.message });
+		sendResponse({ res, status: 500, message: err.message });
 	}
 };
 
@@ -135,14 +135,13 @@ export const getShipperReceiverLoads = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		sendResponse({ res, status: 400, message: err.message });
+		sendResponse({ res, status: 500, message: err.message });
 	}
 };
 
 //function to create a load
 export const createLoad = async (req, res) => {
 	const db = req.app.locals.client.db("VanHaul");
-
 	try {
 		const newLoad = {
 			_id: uuidv4(),
@@ -155,6 +154,19 @@ export const createLoad = async (req, res) => {
 			data: newLoad,
 			message: "Shipment Created",
 		});
+	} catch (err) {
+		sendResponse({ res, status: 500, message: err.message });
+	}
+};
+
+//function to delete a shipment/load
+
+export const deleteLoad = async (req, res) => {
+	const db = req.app.locals.client.db("VanHaul");
+	const _id = req.body._id;
+	try {
+		const load = await db.collection("loads").findOne({ _id });
+		await db.collection("loads").deleteOne({ _id: _id });
 	} catch (err) {
 		sendResponse({ res, status: 500, message: err.message });
 	}
