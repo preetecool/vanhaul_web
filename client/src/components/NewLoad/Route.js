@@ -7,164 +7,164 @@ import { ShipmentContext } from "../global/hooks/ShipmentContext";
 import { GoogleMap, DistanceMatrixService } from "@react-google-maps/api";
 
 const Route = () => {
-  const {
-    distance,
-    setDistance,
-    drivingTime,
-    setDrivingTime,
-    locations,
-    setLocations,
-  } = useContext(ShipmentContext);
+	const {
+		distance,
+		setDistance,
+		drivingTime,
+		setDrivingTime,
+		locations,
+		setLocations,
+	} = useContext(ShipmentContext);
 
-  const [loaded, setLoaded] = useState(true);
+	const [loaded, setLoaded] = useState(true);
 
-  const handleOriginAddressChange = (value) => {
-    setLocations({ ...locations, origin: value });
-  };
+	const handleOriginAddressChange = (value) => {
+		setLocations({ ...locations, origin: value });
+	};
 
-  const handleDestinationAddressChange = (value) => {
-    setLocations({ ...locations, destination: value });
-  };
+	const handleDestinationAddressChange = (value) => {
+		setLocations({ ...locations, destination: value });
+	};
 
-  const getDistanceAndTime = (e) => {
-    e.preventDefault();
-    if (!locations) {
-      return;
-    }
+	const getDistanceAndTime = (e) => {
+		e.preventDefault();
+		if (!locations) {
+			return;
+		}
 
-    const matrix = new google.maps.DistanceMatrixService();
+		const matrix = new google.maps.DistanceMatrixService();
 
-    const orig = locations.origin;
-    const dest = locations.destination;
+		const orig = locations.origin;
+		const dest = locations.destination;
 
-    matrix.getDistanceMatrix(
-      {
-        origins: [orig],
-        destinations: [dest],
-        travelMode: "DRIVING",
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        avoidHighways: false,
-        avoidTolls: false,
-      },
-      (response, status) => {
-        if (status !== "OK") {
-          alert("Error was: " + status);
-        } else {
-          let origins = response.originAddresses;
-          let destinations = response.destinationAddresses;
+		matrix.getDistanceMatrix(
+			{
+				origins: [orig],
+				destinations: [dest],
+				travelMode: "DRIVING",
+				unitSystem: google.maps.UnitSystem.IMPERIAL,
+				avoidHighways: false,
+				avoidTolls: false,
+			},
+			(response, status) => {
+				if (status !== "OK") {
+					alert("Error was: " + status);
+				} else {
+					let origins = response.originAddresses;
+					let destinations = response.destinationAddresses;
 
-          //Loop through the elements row to get the value of duration and distance
-          for (let i = 0; i < origins.length; i++) {
-            let results = response.rows[i].elements;
-            for (let j = 0; j < results.length; j++) {
-              let element = results[j];
-              let distanceString = element.distance.text;
-              let durationString = element.duration.text;
+					//Loop through the elements row to get the value of duration and distance
+					for (let i = 0; i < origins.length; i++) {
+						let results = response.rows[i].elements;
+						for (let j = 0; j < results.length; j++) {
+							let element = results[j];
+							let distanceString = element.distance.text;
+							let durationString = element.duration.text;
 
-              setDistance(distanceString);
-              setDrivingTime(durationString);
-              setLoaded(false);
-              console.log(distance);
-              console.log(drivingTime);
-            }
-          }
-        }
-      }
-    );
-  };
+							setDistance(distanceString);
+							setDrivingTime(durationString);
+							setLoaded(false);
+							// console.log(distance);
+							// console.log(drivingTime);
+						}
+					}
+				}
+			}
+		);
+	};
 
-  return (
-    <>
-      {/* Input for origin Address */}
+	return (
+		<>
+			{/* Input for origin Address */}
 
-      <PlacesAutocomplete
-        value={locations.origin}
-        onChange={handleOriginAddressChange}
-        onSelect={handleOriginAddressChange}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <input
-              {...getInputProps({
-                placeholder: "Enter Origin Address",
-              })}
-              style={{ backgroundColor: "none" }}
-            />
-            <div>
-              {loading && <div>Loading...</div>}
-              {suggestions.map((suggestion) => {
-                const style = suggestion.active
-                  ? {
-                      backgroundColor: "#fbffb0",
-                      cursor: "pointer",
-                    }
-                  : {
-                      backgroundColor: "#fff",
-                      cursor: "pointer",
-                    };
-                return (
-                  <div {...getSuggestionItemProps(suggestion, { style })}>
-                    {suggestion.description}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
-      {/* Input for destination Address */}
-      <PlacesAutocomplete
-        value={locations.destination}
-        onChange={handleDestinationAddressChange}
-        onSelect={handleDestinationAddressChange}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <input
-              {...getInputProps({
-                placeholder: "Destination Address",
-              })}
-            />
-            <div>
-              {loading && <div>Loading...</div>}
-              {suggestions.map((suggestion) => {
-                const style = suggestion.active
-                  ? {
-                      backgroundColor: "#fbffb0",
-                      cursor: "pointer",
-                    }
-                  : {
-                      backgroundColor: "#fff",
-                      cursor: "pointer",
-                    };
-                return (
-                  <div {...getSuggestionItemProps(suggestion, { style })}>
-                    {suggestion.description}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
-      {/* <DateTimeContainer>
+			<PlacesAutocomplete
+				value={locations.origin}
+				onChange={handleOriginAddressChange}
+				onSelect={handleOriginAddressChange}
+			>
+				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+					<div>
+						<input
+							{...getInputProps({
+								placeholder: "Enter Origin Address",
+							})}
+							style={{ backgroundColor: "none" }}
+						/>
+						<div>
+							{loading && <div>Loading...</div>}
+							{suggestions.map((suggestion) => {
+								const style = suggestion.active
+									? {
+											backgroundColor: "#fbffb0",
+											cursor: "pointer",
+									  }
+									: {
+											backgroundColor: "#fff",
+											cursor: "pointer",
+									  };
+								return (
+									<div {...getSuggestionItemProps(suggestion, { style })}>
+										{suggestion.description}
+									</div>
+								);
+							})}
+						</div>
+					</div>
+				)}
+			</PlacesAutocomplete>
+			{/* Input for destination Address */}
+			<PlacesAutocomplete
+				value={locations.destination}
+				onChange={handleDestinationAddressChange}
+				onSelect={handleDestinationAddressChange}
+			>
+				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+					<div>
+						<input
+							{...getInputProps({
+								placeholder: "Destination Address",
+							})}
+						/>
+						<div>
+							{loading && <div>Loading...</div>}
+							{suggestions.map((suggestion) => {
+								const style = suggestion.active
+									? {
+											backgroundColor: "#fbffb0",
+											cursor: "pointer",
+									  }
+									: {
+											backgroundColor: "#fff",
+											cursor: "pointer",
+									  };
+								return (
+									<div {...getSuggestionItemProps(suggestion, { style })}>
+										{suggestion.description}
+									</div>
+								);
+							})}
+						</div>
+					</div>
+				)}
+			</PlacesAutocomplete>
+			{/* <DateTimeContainer>
 				<DateTimePicker onChange={setDateTime} value={dateTime} />
 			</DateTimeContainer> */}
-      <button onClick={getDistanceAndTime}>Get Distance</button>
+			<button onClick={getDistanceAndTime}>Get Distance</button>
 
-      {!loaded ? (
-        <>
-          <div style={{ fontSize: "0.9em" }}>Distance: {distance}</div>
-          <div style={{ fontSize: "0.9em" }}>Driving Time: {drivingTime}</div>
-        </>
-      ) : null}
-    </>
-  );
+			{!loaded ? (
+				<>
+					<div style={{ fontSize: "0.9em" }}>Distance: {distance}</div>
+					<div style={{ fontSize: "0.9em" }}>Driving Time: {drivingTime}</div>
+				</>
+			) : null}
+		</>
+	);
 };
 
 const DateTimeContainer = styled.div`
-  display: flex;
-  width: 100%;
+	display: flex;
+	width: 100%;
 `;
 
 export default Route;

@@ -14,6 +14,8 @@ ReactDOM.render(
 		domain={domain}
 		clientId={clientId}
 		redirectUri={window.location.origin}
+		useRefreshTokens={true}
+		cacheLocation="localstorage"
 	>
 		<Router>
 			<ShipmentProvider>
