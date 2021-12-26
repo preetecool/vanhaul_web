@@ -11,10 +11,10 @@ body:not(header){
     
     background-color:#EAEDED;
     margin:auto;
-    padding: 2%;
   
 
 }
+
 
 
 input {

@@ -55,14 +55,15 @@ const Header = () => {
 
 const Wrapper = styled.header`
 	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 	width: 100%;
 	margin: auto;
-	height: 8vh;
 	border-bottom: 1px solid lightgrey;
 `;
 
 const Logo = styled.img`
-	width: 23px;
+	width: 1.4em;
 `;
 
 const LogoLink = styled(Link)`

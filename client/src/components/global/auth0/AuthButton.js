@@ -8,13 +8,7 @@ import LogoutButton from "./LogoutButton";
 const AuthenticationButton = () => {
 	const { isAuthenticated } = useAuth0();
 
-	return (
-		<Wrapper> {isAuthenticated ? <LogoutButton /> : <LoginButton />}</Wrapper>
-	);
+	return <> {isAuthenticated ? <LogoutButton /> : <LoginButton />}</>;
 };
-
-const Wrapper = styled.div`
-	margin-left: auto;
-`;
 
 export default AuthenticationButton;
