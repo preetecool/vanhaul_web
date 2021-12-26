@@ -39,4 +39,8 @@ li:hover {
     background-color: lightyellow;
 }
 
+button {
+    background: none;
+}
+
 `;

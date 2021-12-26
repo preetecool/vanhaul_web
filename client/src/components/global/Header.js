@@ -56,7 +56,7 @@ const Header = () => {
 const Wrapper = styled.header`
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	width: 100%;
 	margin: auto;
 	border-bottom: 1px solid lightgrey;

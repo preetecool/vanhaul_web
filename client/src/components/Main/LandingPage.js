@@ -39,7 +39,6 @@ const Wrapper = styled.div`
 
 const LeftContent = styled.div`
 	margin-top: 7em;
-	width: 50%;
 	padding: 5%;
 `;
 
@@ -53,7 +52,6 @@ const BG = styled.div`
 	border-bottom-left-radius: 50%;
 	background: blue;
 	height: 100vh;
-	width: 40vw;
 `;
 
 const ImgWrap = styled.div`
@@ -70,7 +68,9 @@ const RightContent = styled.div`
 	margin-left: auto;
 `;
 
-const HeroImg = styled.img``;
+const HeroImg = styled.img`
+	max-width: 400px; ;
+`;
 
 const LinkTo = styled(Link)`
 	display: flex;
