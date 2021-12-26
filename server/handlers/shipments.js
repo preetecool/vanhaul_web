@@ -160,7 +160,6 @@ export const createLoad = async (req, res) => {
 };
 
 //function to delete a shipment/load
-
 export const deleteLoad = async (req, res) => {
 	const db = req.app.locals.client.db("VanHaul");
 	const _id = req.body._id;

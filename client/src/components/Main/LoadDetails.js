@@ -35,7 +35,12 @@ const LoadDetails = () => {
 			const id = user.email;
 			let response;
 			try {
-				response = await fetch(`https://vanhaul.herokuapp.com/api/users/${id}`);
+				response = await fetch(
+					`https://vanhaul.herokuapp.com/api/users/${id}`,
+					{
+						method: "DELETE",
+					}
+				);
 				const data = await response.json();
 
 				setUserData(data.data);
@@ -47,6 +52,15 @@ const LoadDetails = () => {
 
 		fetchUsers();
 	}, [isAuthenticated]);
+
+	// useEffect(() => {
+	const deleteLoad = async () => {
+		await fetch(`https://vanhaul.herokuapp.com/api/loads/${_id}`, {
+			method: "DELETE",
+		});
+	};
+
+	// }, []);
 
 	if (!isAuthenticated || !load || loading) return null;
 	return (
@@ -96,7 +110,7 @@ const LoadDetails = () => {
 				<br />
 
 				<ButtonWrap>
-					<CancelLoad>Cancel Shipment</CancelLoad>
+					<CancelLoad onClick={deleteLoad}>Cancel Shipment</CancelLoad>
 					<CompleteLoad>Complete Shipment</CompleteLoad>
 				</ButtonWrap>
 			</Container>
