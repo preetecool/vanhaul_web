@@ -160,14 +160,13 @@ export const createLoad = async (req, res) => {
 };
 
 //function to delete a shipment/load
-
 export const deleteLoad = async (req, res) => {
 	const db = req.app.locals.client.db("VanHaul");
 	const _id = req.body._id;
 	try {
 		const load = await db.collection("loads").findOne({ _id });
 		await db.collection("loads").deleteOne({ _id: _id });
-		sendResponse({ res, status: 200, message: err.message });
+		sendResponse({ res, status: 200, message: "Load Deleted" });
 	} catch (err) {
 		sendResponse({ res, status: 500, message: err.message });
 	}
