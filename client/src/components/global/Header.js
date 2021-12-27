@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import AuthenticationButton from "./auth0/AuthButton";
 import logo from "../../assets/vanhaul_logo.svg";
+import { device } from "./DeviceSize";
 
 const Header = () => {
 	const { user, isAuthenticated } = useAuth0();
@@ -60,6 +61,9 @@ const Wrapper = styled.header`
 	width: 100%;
 	margin: auto;
 	border-bottom: 1px solid lightgrey;
+
+	@media ${device.tablet} {
+	}
 `;
 
 const Logo = styled.img`
